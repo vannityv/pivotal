@@ -1,0 +1,928 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="A product development process for teams who are embracing the AI advances, but recognise the need for humans. By Vann Vogstad.">
+<meta name="author" content="Vann Vogstad">
+<meta property="og:type" content="website">
+<meta property="og:title" content="The PIVoTAL Process">
+<meta property="og:description" content="A product development process for teams who are embracing the AI advances, but recognise the need for humans. By Vann Vogstad.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The PIVoTAL Process">
+<meta name="twitter:description" content="A product development process for teams who are embracing the AI advances, but recognise the need for humans. By Vann Vogstad.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23FBFAF6'/%3E%3Ccircle cx='32' cy='32' r='17' fill='none' stroke='%23CB0A73' stroke-width='9'/%3E%3C/svg%3E">
+<title>The PIVoTAL Process</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;500;600;700;800;900&display=swap">
+<style>
+  :root {
+    color-scheme: light;
+    --paper:     #FBFAF6;
+    --surface:   #FFFFFF;
+    --ink:       #241F19;
+    --ink-2:     #59534A;
+    --ink-3:     #8B8377;
+    --rule:      #E6E1D6;
+    --rule-soft: #F0ECE3;
+    --accent:    #CB0A73;
+    --accent-2:  #A40A5D;
+    --accent-bg: #FCEEF5;
+    --soft-bg:   #F3F1EA;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Mulish", "Helvetica Neue", Arial, sans-serif;
+    font-size: 18.5px;
+    line-height: 1.66;
+    -webkit-font-smoothing: antialiased;
+  }
+  @media (max-width: 640px) { body { font-size: 17.5px; } }
+
+  h1, h2, h3 {
+    font-family: "Mulish", "Helvetica Neue", Arial, sans-serif;
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    text-wrap: balance;
+    margin: 0;
+  }
+
+  a { color: inherit; }
+  a:focus-visible, button:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 3px;
+  }
+
+  /* nav */
+  .nav {
+    position: sticky;
+    top: env(safe-area-inset-top, 0px);
+    z-index: 50;
+    background: rgba(251, 250, 246, .9);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--rule);
+  }
+  .nav-in { max-width: 1140px; margin: 0 auto; padding: 11px 16px; display: flex; align-items: center; gap: 20px; }
+  .nav-mark {
+    font-family: "Mulish", "Helvetica Neue", Arial, sans-serif; font-weight: 800;
+    font-size: 17px; letter-spacing: -0.02em; flex: none; text-decoration: none;
+    line-height: 1; display: inline-flex; align-items: baseline;
+  }
+  .nav-mark .o { color: var(--accent); font-size: 1.3em; font-weight: 600; line-height: 0; }
+  .nav-links { display: flex; gap: 20px; overflow-x: auto; scrollbar-width: none; margin-left: auto; }
+  .nav-links::-webkit-scrollbar { display: none; }
+  .nav-links a {
+    font-size: 13.5px; font-weight: 500; color: var(--ink-3);
+    text-decoration: none; white-space: nowrap;
+    padding: 3px 0; border-bottom: 2px solid transparent;
+    transition: color .15s, border-color .15s;
+  }
+  .nav-links a:hover { color: var(--ink); }
+  .nav-links a.on { color: var(--ink); border-bottom-color: var(--accent); }
+  @media (max-width: 820px) { .nav-links { display: none; } }
+
+  /* shell */
+  .wrap { max-width: 1140px; margin: 0 auto; padding-inline: 20px; }
+  .col { max-width: 620px; }
+  .col-wide { max-width: 840px; }
+  .sec { padding-block: 62px; border-top: 1px solid var(--rule); }
+
+  .eyebrow {
+    font-size: 12.5px; font-weight: 700; letter-spacing: .14em;
+    text-transform: uppercase; color: var(--accent); margin: 0 0 16px;
+  }
+  h2 { font-size: clamp(30px, 5vw, 46px); line-height: 1.08; margin-bottom: 20px; }
+  h3 { font-size: clamp(19px, 2.5vw, 23px); font-weight: 600; line-height: 1.25; margin: 36px 0 10px; }
+  p { margin: 0 0 18px; }
+  .lede { font-size: clamp(20px, 2.8vw, 24px); line-height: 1.48; color: var(--ink-2); font-weight: 500; }
+  strong { font-weight: 700; }
+
+  /* hero */
+  .hero { padding-block: clamp(30px, 5vw, 54px) clamp(42px, 6vw, 66px); }
+  .heroart { width: 100%; max-width: 560px; height: auto; display: block; margin: 0 0 30px; }
+  .wordmark {
+    font-family: "Mulish", "Helvetica Neue", Arial, sans-serif; font-weight: 900;
+    font-size: clamp(52px, 12.5vw, 122px); line-height: .98;
+    letter-spacing: -0.045em; margin: 0 0 14px;
+  }
+  .wordmark .o { color: var(--accent); font-size: 1.3em; font-weight: 700; line-height: 0; }
+  .tagline {
+    font-family: "Mulish", "Helvetica Neue", Arial, sans-serif; font-weight: 600;
+    font-size: clamp(22px, 3.5vw, 33px); line-height: 1.22; letter-spacing: -0.02em;
+    margin: 0 0 30px; max-width: 20ch; color: var(--ink);
+  }
+  .hero .sub { color: var(--ink-2); max-width: 46ch; margin: 0 0 30px; }
+  .byline {
+    font-size: 15px; color: var(--ink-3);
+    border-top: 1px solid var(--rule); padding-top: 18px; max-width: 46ch;
+  }
+  .byline b { color: var(--ink); font-weight: 600; }
+  .expand {
+    display: flex; flex-wrap: wrap; margin: 0 0 28px;
+    font-size: clamp(13px, 2vw, 16px); font-weight: 600; color: var(--ink-2);
+  }
+  .expand span { display: inline-flex; align-items: baseline; }
+  .expand span::after { content: "·"; color: var(--rule); padding-inline: 10px; }
+  .expand span:last-child::after { content: ""; padding: 0; }
+  .expand i { font-style: normal; color: var(--accent); }
+  .expand .quiet { color: var(--ink-3); font-weight: 400; }
+
+  /* pull */
+  .pull-sec { background: var(--accent-bg); padding-block: clamp(40px, 5.5vw, 62px); border-top: 1px solid var(--rule); }
+  .pull {
+    font-family: "Mulish", "Helvetica Neue", Arial, sans-serif; font-weight: 600;
+    font-size: clamp(26px, 4.6vw, 46px); line-height: 1.1;
+    margin: 0; max-width: 18ch; color: var(--ink); text-wrap: balance;
+  }
+  .pull .hi { color: var(--accent); }
+
+  /* flow diagram */
+  .chart { margin: 30px 0 12px; }
+  .chart svg { width: 100%; max-width: 740px; height: auto; display: block; font-family: "Mulish", sans-serif; }
+  .dg-box { fill: var(--surface); stroke: var(--ink); stroke-width: 1.4; }
+  .dg-live { fill: var(--accent); stroke: var(--accent); stroke-width: 1.4; }
+  .dg-name { fill: var(--ink); font-size: 16px; font-weight: 700; }
+  .dg-name .k { fill: var(--accent); }
+  .dg-sub { fill: var(--ink-2); font-size: 13.5px; }
+  .dg-on { fill: #FFFFFF; font-size: 16px; font-weight: 700; }
+  .dg-fwd { stroke: var(--ink); stroke-width: 1.4; fill: none; }
+  .dg-loop { stroke: var(--accent); stroke-width: 2.2; fill: none; }
+  .dg-loopt { fill: var(--accent); font-size: 12.5px; font-weight: 700; }
+  .dg-back { stroke: var(--accent); stroke-width: 1.3; fill: none; stroke-dasharray: 5 4; }
+  .dg-head { fill: var(--ink); }
+  .dg-headb { fill: var(--accent); }
+  .dg-par { fill: var(--ink-3); font-size: 11px; font-weight: 700; letter-spacing: .14em; }
+  .caption { font-size: 15.5px; color: var(--ink-3); margin-top: 8px; max-width: 58ch; }
+
+  /* stage list */
+  .stages { margin: 34px 0 0; display: grid; gap: 1px; background: var(--rule); border-block: 1px solid var(--rule); }
+  .stage { background: var(--paper); display: grid; grid-template-columns: 172px 1fr 150px; gap: 22px; padding: 18px 0; align-items: start; }
+  @media (max-width: 760px) { .stage { grid-template-columns: 1fr; gap: 4px; padding: 16px 0; } }
+  .stage h3 { margin: 0; font-size: 20px; font-weight: 700; }
+  .stage h3 i { font-style: normal; color: var(--accent); }
+  .stage h3 .tag { display: block; font-family: "Mulish", sans-serif; font-size: 13.5px; font-weight: 500; color: var(--ink-3); letter-spacing: 0; }
+  .stage p { margin: 0; font-size: 17px; line-height: 1.5; color: var(--ink-2); }
+  .stage .two p { margin: 0 0 12px; font-size: 17px; line-height: 1.5; color: var(--ink-2); }
+  .stage .two p:last-child { margin-bottom: 0; }
+  .stage .two b { color: var(--ink); font-weight: 700; }
+  .stage .sk { display: inline-block; font-size: 12.5px; font-weight: 700; letter-spacing: .05em; color: var(--accent); background: var(--accent-bg); border-radius: 20px; padding: 2px 10px; margin-left: 4px; white-space: nowrap; }
+  .stage .who { font-size: 13.5px; color: var(--ink-3); line-height: 1.45; }
+  .stage .who b { display: block; color: var(--ink); font-weight: 600; }
+
+  /* tables */
+  .scroll { overflow-x: auto; margin: 22px 0 8px; }
+  table { border-collapse: collapse; width: 100%; min-width: 520px; font-size: 15.5px; line-height: 1.45; font-variant-numeric: tabular-nums; }
+  th {
+    text-align: left; font-weight: 700; font-size: 12px; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--ink-3);
+    border-bottom: 1px solid var(--rule); padding: 0 16px 9px 0;
+  }
+  td { padding: 12px 16px 12px 0; border-bottom: 1px solid var(--rule-soft); vertical-align: top; color: var(--ink-2); }
+  td:first-child { color: var(--ink); font-weight: 600; white-space: nowrap; }
+  .num { text-align: center; width: 84px; }
+  th.num { padding-right: 0; }
+  td.num { padding-right: 0; color: var(--ink); font-weight: 600; }
+
+  /* lists */
+  ul.plain { list-style: none; margin: 0 0 18px; padding: 0; }
+  ul.plain li { padding-left: 24px; position: relative; margin-bottom: 9px; }
+  ul.plain li::before {
+    content: ""; position: absolute; left: 2px; top: .74em;
+    width: 8px; height: 8px; border-radius: 50%; border: 1.5px solid var(--accent);
+  }
+  ol.steps { margin: 0 0 18px; padding-left: 0; list-style: none; counter-reset: s; }
+  ol.steps li { counter-increment: s; padding-left: 42px; position: relative; margin-bottom: 12px; }
+  ol.steps li::before {
+    content: counter(s); position: absolute; left: 0; top: .1em;
+    font-family: "Mulish", sans-serif; font-size: 15px; font-weight: 600;
+    color: var(--accent); background: var(--accent-bg);
+    border-radius: 50%; width: 28px; height: 28px; display: grid; place-items: center;
+  }
+
+  /* sub navigation */
+  .subnav { display: flex; flex-wrap: wrap; gap: 10px 22px; margin: 0 0 34px; padding: 0; list-style: none; }
+  .subnav a {
+    font-size: 14.5px; font-weight: 500; color: var(--ink-3); text-decoration: none;
+    border-bottom: 1px solid var(--rule); padding-bottom: 3px;
+    transition: color .15s, border-color .15s;
+  }
+  .subnav a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+
+  /* contained sub-block */
+  .block-in {
+    background: var(--soft-bg); border-radius: 8px;
+    padding: 30px 30px 24px; margin-top: 42px;
+  }
+  @media (max-width: 620px) { .block-in { padding: 24px 18px 18px; margin-inline: -4px; } }
+  .block-in h3 { margin-top: 0; }
+  .block-in .kicker { font-size: 12.5px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-3); margin: 0 0 10px; }
+  .block-in p, .block-in td { color: var(--ink-2); }
+  .block-in td:first-child { color: var(--ink); }
+  .block-in th { color: var(--ink-3); border-bottom-color: #E2DED2; }
+  .block-in td { border-bottom-color: #E9E5DA; }
+  .block-in table { font-size: 14.5px; }
+
+  /* skills */
+  .skills { margin-top: 26px; display: grid; gap: 1px; background: var(--rule); border-block: 1px solid var(--rule); }
+  .skill-row { background: var(--paper); display: grid; grid-template-columns: 180px 1fr; gap: 22px; padding: 20px 0; }
+  @media (max-width: 680px) { .skill-row { grid-template-columns: 1fr; gap: 4px; padding: 16px 0; } }
+  .skill-row h3 { margin: 0; font-size: 21px; font-weight: 700; }
+  .skill-row p { margin: 0; font-size: 17px; line-height: 1.5; color: var(--ink-2); }
+
+  /* scorecard */
+  .card {
+    background: var(--surface); border: 1px solid var(--rule); border-radius: 6px;
+    padding: 26px 26px 22px; margin-top: 30px; max-width: 560px;
+  }
+  .card h3 { margin: 0 0 8px; font-size: 21px; }
+  .card p { font-size: 16.5px; color: var(--ink-2); margin-bottom: 18px; }
+  .btn {
+    font-family: "Mulish", sans-serif; font-size: 16px; font-weight: 600;
+    background: var(--ink); color: var(--paper); border: 0; border-radius: 40px;
+    padding: 12px 24px; cursor: pointer; transition: background .15s;
+  }
+  .btn:hover { background: var(--accent); }
+  .btn[disabled] { opacity: .5; cursor: default; }
+  .note { font-size: 14.5px; color: var(--ink-3); margin: 12px 0 0; min-height: 1.4em; }
+
+
+  /* footer */
+  .foot { border-top: 1px solid var(--rule); padding-block: 46px 70px; font-size: 16.5px; color: var(--ink-3); }
+  .foot a { color: var(--accent); text-underline-offset: 3px; }
+  .foot .sig { font-size: 14px; margin-top: 26px; letter-spacing: .04em; }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
+  }
+  html { scroll-behavior: smooth; }
+  :target { scroll-margin-top: 72px; }
+</style>
+<style>
+  img { max-width: 100%; }
+  [hidden] { display: none !important; }
+</style>
+</head>
+<body>
+
+
+<nav class="nav">
+  <div class="nav-in">
+    <a class="nav-mark" href="#top">PIV<span class="o">o</span>TAL</a>
+    <div class="nav-links">
+      <a href="#changed">How the world has changed</a>
+      <a href="#who">Who this is for</a>
+      <a href="#process">The process</a>
+      <a href="#skills">Skills</a>
+      <a href="#adopt">Adopting</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <svg class="heroart" viewBox="0 0 580 206" role="img" aria-label="Design, implement and review, connected by two-way arrows and a loop back to the start">
+      <g fill="none" stroke="#241F19" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+
+        <g transform="rotate(-1.4 90 80)">
+          <rect x="20" y="24" width="140" height="112" rx="11"/>
+          <path d="M48 52 C66 42 84 62 100 50 C114 40 128 52 134 62" stroke-dasharray="5 5"/>
+          <path d="M48 76 C66 66 84 86 100 74 C114 64 128 76 134 86" stroke-dasharray="5 5"/>
+          <path d="M48 98 H108" stroke-dasharray="5 5"/>
+        </g>
+
+        <g transform="rotate(1 270 80)">
+          <rect x="200" y="24" width="140" height="112" rx="11"/>
+          <rect x="222" y="46" width="44" height="30" rx="5" fill="#FCEEF5" stroke="#CB0A73"/>
+          <rect x="274" y="46" width="44" height="30" rx="5"/>
+          <rect x="222" y="84" width="96" height="22" rx="5" fill="#FCEEF5" stroke="#CB0A73"/>
+        </g>
+
+        <g transform="rotate(-0.8 450 80)">
+          <rect x="380" y="24" width="140" height="112" rx="11"/>
+          <circle cx="443" cy="70" r="30"/>
+          <path d="M431 70 L440 80 L457 60" stroke="#CB0A73" stroke-width="2.6"/>
+          <path d="M465 92 L484 110"/>
+        </g>
+
+        <path d="M172 72 H190"/><path d="M184 66 L191 72 L184 78"/>
+        <path d="M190 90 H172"/><path d="M178 84 L171 90 L178 96"/>
+
+        <path d="M352 72 H370"/><path d="M364 66 L371 72 L364 78"/>
+        <path d="M370 90 H352"/><path d="M358 84 L351 90 L358 96"/>
+
+        <path d="M450 148 C450 178 420 186 270 186 C120 186 90 178 90 150" stroke="#CB0A73" stroke-dasharray="6 6"/>
+        <path d="M84 158 L90 146 L96 158" stroke="#CB0A73"/>
+      </g>
+      <text x="90" y="124" text-anchor="middle" fill="#59534A" font-size="13.5" font-weight="700" font-family="Mulish, sans-serif" letter-spacing="0.08em">DESIGN</text>
+      <text x="270" y="124" text-anchor="middle" fill="#59534A" font-size="13.5" font-weight="700" font-family="Mulish, sans-serif" letter-spacing="0.08em">IMPLEMENT</text>
+      <text x="450" y="124" text-anchor="middle" fill="#59534A" font-size="13.5" font-weight="700" font-family="Mulish, sans-serif" letter-spacing="0.08em">REVIEW</text>
+    </svg>
+
+    <h1 class="wordmark">PIV<span class="o">o</span>TAL</h1>
+    <p class="tagline">As technology quickly evolves, building the right product is pivotal.</p>
+    <div class="expand">
+      <span><i>P</i>roduct</span>
+      <span><i>I</i>mplement</span>
+      <span><i>V</i>alidate</span>
+      <span class="quiet">o</span>
+      <span><i>T</i>est</span>
+      <span><i>A</i>ssure</span>
+      <span><i>L</i>ive</span>
+    </div>
+    <p class="sub">A product development process for teams who are embracing the AI advances, but recognise the need for humans.</p>
+    <p class="byline">by <b>Vann Vogstad</b><br>Founder and CEO, COHO</p>
+  </div>
+</header>
+
+<main>
+
+<section class="sec" id="changed">
+  <div class="wrap col">
+    <p class="eyebrow">01</p>
+    <h2>How the world has changed</h2>
+    <ul class="subnav">
+      <li><a href="#flip">The flip</a></li>
+      <li><a href="#role">What’s next for developers</a></li>
+      <li><a href="#process-must">Why the process has to move</a></li>
+    </ul>
+    <p class="lede" id="flip">Development used to be 90% doing and 10% thinking. That has flipped, and product development processes need to change to suit it.</p>
+    <p>The doing is now fast and cheap. Previously developers needed to know the language, the framework, the patterns. The thinking mattered, but it was the small part of the day.</p>
+    <p>That 10% of thinking is now the critical skill.</p>
+
+    <h3 id="role">What’s next for developers</h3>
+    <p>Developers start from a strong position. That logical mindset takes years to build and it's the hard part to replace. Breaking a problem down, spotting the edge case, telling a good solution from one that only looks good.</p>
+    <p>What changes is where it gets applied. Most developers will need to build real product and implementation skill, which means understanding the customer, taking a rough intent and turning it into something real, and knowing which questions to ask before building anything. The alternative is to go further the other way and get deeply technical: architecture, infrastructure, integrations, the data model, judging whether generated code is safe, and owning the guidance the AI works from.</p>
+    <p>Both are good careers. Most people will lean one way and keep enough of the other to be useful.</p>
+    <p>What shrinks is the middle, where the decision was already made and someone had to type it out.</p>
+
+    <h3 id="process-must">Why the process has to move</h3>
+    <p>Long specs, estimates, planning ceremonies and careful scoping all existed to protect engineering time, because engineering time was the expensive thing. Keeping them in place spends the care in the wrong spot.</p>
+    <p>PIVoTAL is what we use at COHO instead.</p>
+  </div>
+</section>
+
+<section class="pull-sec">
+  <div class="wrap col-wide">
+    <p class="pull">90% doing, 10% thinking. Now it's <span class="hi">the other way round</span>.</p>
+  </div>
+</section>
+
+<section class="sec" id="who">
+  <div class="wrap col">
+    <p class="eyebrow">02</p>
+    <h2>Who this is for</h2>
+    <p>This is for people keen to embrace the change, as long as the change is safe and leads to better products. Faster on its own isn't the goal.</p>
+    <p>If you'd rather defend the old process, and not embrace the change that AI is bringing, PIVoTAL isn't for you.</p>
+    <p>It works at any size, because anything large breaks down into pieces small enough for one person to hold in their head. How do you eat an elephant? One bite at a time. There's a section below on running it on something big.</p>
+  </div>
+</section>
+
+<section class="sec" id="process">
+  <div class="wrap col-wide">
+    <p class="eyebrow">03</p>
+    <h2>The process</h2>
+    <ul class="subnav">
+      <li><a href="#flow">The flow</a></li>
+      <li><a href="#stages">The six stages</a></li>
+      <li><a href="#conversation">Implement is a conversation</a></li>
+      <li><a href="#roles">Who carries it</a></li>
+      <li><a href="#handback">Handing it back</a></li>
+      <li><a href="#big">Running it on something big</a></li>
+      <li><a href="#assure">Why Assure gets easier</a></li>
+    </ul>
+    <div class="col">
+      <p>Six stages. Each has one person accountable, a defined exit, and a defined way back. The o is silent, like MoSCoW.</p>
+      <p>It starts with Product, deliberately. The companies that build the best things are the ones where product leads and everything else serves it. Product is first in the name and first in the flow because that's where the thinking starts.</p>
+    </div>
+    <div id="flow"></div>
+
+    <div class="chart">
+      <svg viewBox="0 0 740 754" role="img" aria-label="Flow chart of the six PIVoTAL stages. Product and Implement are joined by a two-way arrow for regular check-ins, and dashed arrows show the routes back from later stages.">
+        <defs>
+          <marker id="h" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0 0 L10 5 L0 10 z" class="dg-head"/>
+          </marker>
+          <marker id="hb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0 0 L10 5 L0 10 z" class="dg-headb"/>
+          </marker>
+        </defs>
+
+        <path class="dg-back" marker-end="url(#hb)" d="M250 340 H130 Q120 340 120 330 V236 Q120 226 130 226 H244"/>
+        <path class="dg-back" marker-end="url(#hb)" d="M250 358 H70 Q60 358 60 348 V80 Q60 70 70 70 H244"/>
+        <path class="dg-back" marker-end="url(#hb)" d="M590 462 H640 Q650 462 650 452 V252 Q650 242 640 242 H596"/>
+        <path class="dg-back" marker-end="url(#hb)" d="M590 600 H690 Q700 600 700 590 V486 Q700 476 690 476 H596"/>
+
+        <path class="dg-loop" marker-start="url(#hb)" marker-end="url(#hb)" d="M420 112 V152"/>
+        <text class="dg-loopt" x="440" y="128">Regular</text>
+        <text class="dg-loopt" x="440" y="145">check-ins</text>
+
+        <path class="dg-fwd" d="M420 262 V284"/>
+        <path class="dg-fwd" marker-end="url(#h)" d="M420 284 H339 Q325 284 325 298 V294"/>
+        <path class="dg-fwd" marker-end="url(#h)" d="M420 284 H501 Q515 284 515 298 V294"/>
+        <path class="dg-fwd" d="M325 388 V400 Q325 414 339 414 H406 Q420 414 420 422"/>
+        <path class="dg-fwd" marker-end="url(#h)" d="M515 388 V400 Q515 414 501 414 H434 Q420 414 420 418"/>
+        <path class="dg-fwd" marker-end="url(#h)" d="M420 516 V546"/>
+        <path class="dg-fwd" marker-end="url(#h)" d="M420 644 V674"/>
+
+        <rect class="dg-box" x="250" y="20" width="340" height="86" rx="6"/>
+        <text class="dg-name" x="272" y="50"><tspan class="k">P</tspan>RODUCT</text>
+        <text class="dg-sub" x="272" y="71">Define what it should do, and why</text>
+        <text class="dg-sub" x="272" y="91">Led by a Product Lead</text>
+
+        <rect class="dg-box" x="250" y="158" width="340" height="104" rx="6"/>
+        <text class="dg-name" x="272" y="190"><tspan class="k">I</tspan>MPLEMENT</text>
+        <text class="dg-sub" x="272" y="211">Build it on screen with AI, writing unit</text>
+        <text class="dg-sub" x="272" y="229">tests as you go</text>
+        <text class="dg-sub" x="272" y="249">Led by an Implementation Lead</text>
+
+        <text class="dg-par" transform="rotate(-90 420 344)" x="420" y="344" text-anchor="middle">IN PARALLEL</text>
+
+        <rect class="dg-box" x="250" y="300" width="150" height="88" rx="6"/>
+        <text class="dg-name" x="268" y="332"><tspan class="k">V</tspan>ALIDATE</text>
+        <text class="dg-sub" x="268" y="353">Product review:</text>
+        <text class="dg-sub" x="268" y="371">does it do the job</text>
+
+        <rect class="dg-box" x="440" y="300" width="150" height="88" rx="6"/>
+        <text class="dg-name" x="458" y="332"><tspan class="k">V</tspan>ALIDATE</text>
+        <text class="dg-sub" x="458" y="353">Design review:</text>
+        <text class="dg-sub" x="458" y="371">does it look right</text>
+
+        <rect class="dg-box" x="250" y="428" width="340" height="88" rx="6"/>
+        <text class="dg-name" x="272" y="460"><tspan class="k">T</tspan>EST</text>
+        <text class="dg-sub" x="272" y="481">Extremes, edge cases, wider use.</text>
+        <text class="dg-sub" x="272" y="499">Try to break it</text>
+
+        <rect class="dg-box" x="250" y="556" width="340" height="88" rx="6"/>
+        <text class="dg-name" x="272" y="588"><tspan class="k">A</tspan>SSURE</text>
+        <text class="dg-sub" x="272" y="609">Code review. Is it safe, does it fit, and</text>
+        <text class="dg-sub" x="272" y="627">is the test coverage enough</text>
+
+        <rect class="dg-live" x="250" y="684" width="340" height="52" rx="6"/>
+        <text class="dg-on" x="272" y="716"><tspan>L</tspan>IVE</text>
+      </svg>
+    </div>
+    <p class="caption">The line between Product and Implement runs both ways, all the time. The dashed lines are the less frequent routes back, and each one is a normal event rather than a failure.</p>
+
+    <div class="stages" id="stages">
+      <div class="stage">
+        <h3><i>P</i>roduct</h3>
+        <p>One person writes the spec. The problem, who has it, what the change does, what it explicitly doesn't do, and how we'll know it worked.</p>
+        <p class="who"><b>Product</b>Product Lead is accountable</p>
+      </div>
+      <div class="stage">
+        <h3><i>I</i>mplement</h3>
+        <p>The spec becomes something working on screen, by prompting AI against our development and design guidelines, with unit tests written as you go rather than bolted on later. The Product Lead stays involved throughout, because this is where the questions the spec never answered come up. Hand-written code is the exception and needs a reason.</p>
+        <p class="who"><b>Implementation</b>Implementation Lead is accountable</p>
+      </div>
+      <div class="stage">
+        <h3><i>V</i>alidate</h3>
+        <div class="two">
+          <p><b>Product review.</b> Does it do what we wanted? Spec coverage, and whether the flow makes sense for what the customer is doing. <span class="sk">Product + UX</span></p>
+          <p><b>Design review.</b> Does it look right? Visual fit with the rest of the product, the design language, the styling rules. <span class="sk">Design + UX</span></p>
+        </div>
+        <p class="who"><b>Run in parallel</b>Both must sign off before Test</p>
+      </div>
+      <div class="stage">
+        <h3><i>T</i>est</h3>
+        <p>Somebody uses it properly and tries to break it. Zero, one, a thousand. Part-filled records. Notifications reaching the right people. Different permissions and account setups.</p>
+        <p class="who"><b>No skill threshold</b>It needs care, not seniority</p>
+      </div>
+      <div class="stage">
+        <h3><i>A</i>ssure</h3>
+        <p>Code review. Is it safe, does it fit the codebase, and is the test coverage good enough? AI reviews first, a human reviews the review. It must not change function or appearance.</p>
+        <p class="who"><b>Technical</b>Reviewer gives the verdict</p>
+      </div>
+      <div class="stage">
+        <h3><i>L</i>ive</h3>
+        <p>Released to customers. Anything Assure found goes back into the AI guidance so the next change starts from a better place.</p>
+        <p class="who"><b>Implementation Lead</b>Carries it to the end</p>
+      </div>
+    </div>
+
+    <div class="col">
+      <h3 id="conversation">Implement is a conversation, not a handover</h3>
+      <p>This is the part most teams get wrong, and it matters more than any other rule here.</p>
+      <p>A product spec describes what something should do. It rarely describes what it should be. As soon as someone starts building, questions appear that the spec never answered. What happens to the records that already exist. Where this sits in the navigation. What the empty state says. Whether this is two screens or one.</p>
+      <p>So Implement is not a stage where someone takes the spec away and comes back with a feature. The Product Lead stays in it. Build a bit, show it, ask, adjust, show it again. That loop can run several times in a day, and it should.</p>
+      <p>The flow is drawn top to bottom, which makes it look like a waterfall. It isn't. The line between Product and Implement is the busiest one on the diagram and it runs both ways, which is why it's the only solid arrow pointing back up.</p>
+      <p>Now and then the intent really is clear enough that nothing needs raising until review. That's rare. Assuming you're in that case is the most common way a change goes wrong.</p>
+
+      <h3 id="roles">Two roles carry it</h3>
+      <p>The <strong>Product Lead</strong> is the person leading the idea. They wrote the spec, they answer questions all the way through Implement, and they own whether this was the right thing to build at all. The <strong>Implementation Lead</strong> runs the build and carries the change through to Live. Everyone else gives a verdict.</p>
+      <p>Nobody signs off their own work. That's the only hard rule.</p>
+
+      <h3>Changes get smaller as work moves down</h3>
+      <p>Product can change anything. Implement changes how it's built. Validate changes function and appearance. Test changes nothing and reports. Assure changes only code, with no visible footprint.</p>
+      <p>If a stage wants to make a change that belongs higher up, it sends it back. That's what stops the last three stages quietly redesigning the product.</p>
+
+      <h3 id="handback">Handing it back</h3>
+      <p>A process that only moves forward is one people lie to. Naming each way back is what keeps everyone comfortable using them.</p>
+    </div>
+
+    <div class="scroll">
+      <table>
+        <thead><tr><th>From</th><th>Back to</th><th>When</th></tr></thead>
+        <tbody>
+          <tr><td>Implement</td><td>Product</td><td>Constantly. Any question the spec did not answer</td></tr>
+          <tr><td>Validate</td><td>Implement</td><td>Function or appearance needs fixing</td></tr>
+          <tr><td>Validate</td><td>Product</td><td>The spec itself was wrong</td></tr>
+          <tr><td>Test</td><td>Implement</td><td>A defect is found</td></tr>
+          <tr><td>Assure</td><td>Test</td><td>A code change carries any behavioural risk</td></tr>
+          <tr><td>Assure</td><td>AI guidance</td><td>The AI got it wrong because our guidance was unclear</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="col">
+      <p style="margin-top:22px">Re-entry is targeted. A fix that changes nothing visible goes back to Test only. A fix that changes function or appearance goes back through the review first.</p>
+      <p>The usual failure isn't a bad review. It's silence, with work sitting on someone who hasn't looked at it. The Implementation Lead chases. If they go quiet, the Product Lead picks it up. That's the whole escalation path.</p>
+
+      <h3 id="big">Running it on something big</h3>
+      <p>A six month project doesn't go through PIVoTAL as one change. It gets specced once at a high level, then broken into areas small enough that one person can hold each in their head.</p>
+      <p>The high level spec answers the questions that only make sense at the top. What are we building, for whom, what does it replace, what are the hard edges. It doesn't try to describe every screen, because it can't, and pretending otherwise is how the old way went wrong.</p>
+      <p>Each area then runs the full loop on its own. Product, Implement, Validate, Test, Assure, Live. Areas can run at the same time if they don't overlap, and the Product Lead stays the same person across all of them so the thing holds together.</p>
+      <p>How do you eat an elephant? One bite at a time. The point of breaking it down isn't project management, it's that a small piece can actually be validated by a human looking at a screen.</p>
+
+      <h3 id="assure">Why Assure gets easier every month</h3>
+      <p>Code review is the stage people expect to grow into a tax, because output grows and someone has to read all of it. It only works that way if you start from "AI code is bad".</p>
+      <p>So when the reviewer wants something changed, they ask a second question. <strong>Why did the AI write it this way?</strong> It's nearly always one of five things, and only the last is a dead end.</p>
+      <ul class="plain">
+        <li>Our guidance didn't cover this case</li>
+        <li>Our guidance covered it ambiguously</li>
+        <li>The existing pattern wasn't discoverable from the prompt or the codebase</li>
+        <li>The prompt left out something the guidance assumes</li>
+        <li>The guidance is right and this was a one-off</li>
+      </ul>
+      <p>Everything but the last one changes the guidance, the docs, or how we prompt. Review stops being a gate and becomes how the team gets better at instructing the thing that writes its code.</p>
+      <p><strong>The measure is the share of changes passing Assure with no changes required.</strong> It should climb month on month. Flat means it isn't working.</p>
+      <p>Track the reasons as well as the rate. Lots of "didn't cover this" means you're in new territory. Lots of "ambiguous" means your docs need rewriting, not extending. One named person owns the guidance, so findings land there instead of being fixed once and forgotten.</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="skills">
+  <div class="wrap col-wide">
+    <p class="eyebrow">04</p>
+    <h2>Skills</h2>
+    <ul class="subnav">
+      <li><a href="#five">The five skills</a></li>
+      <li><a href="#rating">Rating out of 10</a></li>
+      <li><a href="#scorecard">The scorecard</a></li>
+      <li><a href="#sizing">Staffing a change</a></li>
+    </ul>
+    <div class="col">
+      <p>A title says what someone was hired to do. A skill says what they can be handed. Only the second one helps you decide who does what.</p>
+    </div>
+    <div class="skills" id="five">
+      <div class="skill-row">
+        <h3>Product</h3>
+        <p>Knowing what should be built and why. Customer needs, and what the business is trying to achieve. Higher up it means commercial judgement: not just whether a feature is good, but whether it's worth a month right now.</p>
+      </div>
+      <div class="skill-row">
+        <h3>Implementation</h3>
+        <p>Prompting AI to build the product. Specs always miss detail, so this is the extra set of eyes. Knowing the existing building blocks and putting the right one in the right place instead of inventing a new pattern every time.</p>
+      </div>
+      <div class="skill-row">
+        <h3>Design</h3>
+        <p>Whether it looks right and fits the product. Early on it also means checking the design files and making sure the styling follows the rules.</p>
+      </div>
+      <div class="skill-row">
+        <h3>UX</h3>
+        <p>How it feels. Using it and asking whether it makes sense, whether it's easy, whether it asks for the right thing at the right moment. UX sits across both reviews rather than being a stage of its own.</p>
+      </div>
+      <div class="skill-row">
+        <h3>Technical</h3>
+        <p>Dev ops, reading code and judging it, understanding the limits of the tech you and your partners depend on. Sometimes needed in Implement, always needed in Assure, and needed to keep the AI guidance clear.</p>
+      </div>
+    </div>
+
+    <h3 id="rating" style="margin-top:44px">Rating out of 10</h3>
+    <div class="col">
+      <p>A number on its own just starts an argument. What makes it usable is everyone agreeing what each band means. Most people are strong in two or three and have a zero somewhere. That's normal.</p>
+    </div>
+    <div class="scroll">
+      <table>
+        <thead><tr><th class="num">Score</th><th>Band</th><th>What it means in any skill</th></tr></thead>
+        <tbody>
+          <tr><td class="num">0&ndash;1</td><td>None</td><td>No working capability here</td></tr>
+          <tr><td class="num">2&ndash;3</td><td>Aware</td><td>Follows someone else's work. Can't carry it</td></tr>
+          <tr><td class="num">4&ndash;5</td><td>Capable with support</td><td>Fine on straightforward work. Needs checking, and help when it's unfamiliar</td></tr>
+          <tr><td class="num">6&ndash;7</td><td>Independent</td><td>Carries normal work start to finish. Knows when they're out of their depth</td></tr>
+          <tr><td class="num">8&ndash;9</td><td>Strong</td><td>Handles unfamiliar and complex work. Others come to them</td></tr>
+          <tr><td class="num">10</td><td>Sets the standard</td><td>Defines how the team does this and improves it</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col">
+      <p style="margin-top:22px">Self rate first, then calibrate. A score needs a recent example behind it, not a feeling.</p>
+      <p>Publish them. Secret scores make staffing look arbitrary, and people assume the worst about themselves.</p>
+      <p>Keep it away from performance review. This measures what someone can be handed, not how well they're doing. A four in four skills and a nine in the fifth can be your most valuable person.</p>
+      <p>Keep tens rare. If half the team is a ten at something, the scale has stopped being useful.</p>
+    </div>
+
+    <div class="card" id="scorecard">
+      <h3>The scorecard</h3>
+      <p>A printable sheet for rating one person across the five skills. It keeps the last score alongside the new one, small and quiet, so you can see which way someone is moving.</p>
+      <button class="btn" id="dl" type="button">Download the scorecard (PNG)</button>
+      <p class="note" id="dlnote"></p>
+    </div>
+
+    <div class="block-in" id="sizing">
+      <p class="kicker">Optional</p>
+      <h3>Staffing a change</h3>
+      <div class="col">
+        <p>Ratings are only worth collecting if they decide something, so this connects them to who does the work. It's also the easiest part to over-engineer, so treat it as a starting point.</p>
+        <p>Size the change first. The highest tier any answer lands on sets the size of the whole thing.</p>
+      </div>
+      <div class="scroll">
+        <table>
+          <thead><tr><th>Question</th><th>Small</th><th>Standard</th><th>Significant</th></tr></thead>
+          <tbody>
+            <tr><td>Product thinking</td><td>Obvious extension of what we do</td><td>New capability in a known area</td><td>New to us, or affects positioning</td></tr>
+            <tr><td>New UI</td><td>Existing blocks only</td><td>Mostly existing, some adaptation</td><td>New pattern needed</td></tr>
+            <tr><td>Technical reach</td><td>One area, no data model change</td><td>Several areas, contained data change</td><td>Integrations, infra, auth, billing</td></tr>
+            <tr><td>If it goes wrong</td><td>Cosmetic or easily reverted</td><td>Users notice and complain</td><td>Data loss, money, compliance, trust</td></tr>
+            <tr><td>Who sees it</td><td>Internal or a small subset</td><td>Most customers</td><td>Everyone, or an external launch</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col">
+        <p style="margin-top:20px">Then read off the minimum rating each stage needs. These are ours. Tune them, because the shape matters more than the figures: thresholds rise with tier, reviewers sit at or above implementers, and Test is never gated.</p>
+      </div>
+      <div class="scroll">
+        <table>
+          <thead><tr><th>Stage and skill</th><th class="num">Small</th><th class="num">Standard</th><th class="num">Significant</th></tr></thead>
+          <tbody>
+            <tr><td>Product, for the spec</td><td class="num">4</td><td class="num">6</td><td class="num">8</td></tr>
+            <tr><td>Implementation</td><td class="num">4</td><td class="num">6</td><td class="num">7</td></tr>
+            <tr><td>Technical, within Implement</td><td class="num">&ndash;</td><td class="num">5</td><td class="num">7</td></tr>
+            <tr><td>Validate, product review</td><td class="num">5</td><td class="num">6</td><td class="num">8</td></tr>
+            <tr><td>Validate, design review</td><td class="num">5</td><td class="num">6</td><td class="num">7</td></tr>
+            <tr><td>UX, within either review</td><td class="num">4</td><td class="num">5</td><td class="num">7</td></tr>
+            <tr><td>Test</td><td class="num">&ndash;</td><td class="num">&ndash;</td><td class="num">&ndash;</td></tr>
+            <tr><td>Assure</td><td class="num">5</td><td class="num">6</td><td class="num">8</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col">
+        <p style="margin-top:20px">If nobody clears a threshold you have three honest options. Pair someone under it with someone over it, bring in help, or accept the risk and write down that you did. Quietly letting a five do an eight's job isn't one of them.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="adopt">
+  <div class="wrap col-wide">
+    <p class="eyebrow">05</p>
+    <h2>Adopting it</h2>
+    <ul class="subnav">
+      <li><a href="#steps">Five steps</a></li>
+      <li><a href="#meaningful">What counts as a change</a></li>
+      <li><a href="#guidance">Write the guidance files first</a></li>
+    </ul>
+    <div class="col">
+      <p id="steps">The risk is that it arrives all at once, everyone follows it for two weeks, and then it quietly stops.</p>
+      <ol class="steps">
+        <li>Agree the stages, the skill definitions and the thresholds. Changes now are cheap.</li>
+        <li>Rate the team. Self rate, calibrate, publish.</li>
+        <li>Run it on the next two or three changes. Pick a big one, because easy ones won't find the gaps.</li>
+        <li>Review what broke. It'll be handoffs and thresholds. Adjust.</li>
+        <li>Make it the default and start tracking the pass rate.</li>
+      </ol>
+      <h3 id="meaningful">What counts as a change</h3>
+      <p>Decide early what counts as a meaningful change. If everything goes through the full process it becomes a bottleneck and people will route around it. Ours is anything a customer would notice, and anything touching data, money or permissions. A typo fix doesn't, but it still gets Assure.</p>
+      <p>Incidents and urgent customer fixes keep whatever route they have now. Making one process serve both is how processes get abandoned.</p>
+
+      <h3 id="guidance">Write the guidance files first</h3>
+      <p>PIVoTAL is AI-first, so the quality of what comes out is the quality of what you put in. Before running this on anything real, write down how your codebase works.</p>
+      <p>Most tools now read an <strong>AGENTS.md</strong> at the root of the repo, and some read their own equivalent. The filename matters less than the habit. It's where you tell the AI what it would otherwise have to guess.</p>
+      <ul class="plain">
+        <li>The stack, and the conventions you actually follow rather than the ones you meant to</li>
+        <li>Where things live, and which existing patterns should be reused instead of reinvented</li>
+        <li>How you name things</li>
+        <li>What your tests look like and what has to be covered</li>
+        <li>What's off limits, and what needs a human before it's touched</li>
+      </ul>
+      <p>It's never finished, and that's the point. Every finding from Assure goes back into it. Over time it becomes the most valuable file in the repo, because it's the one deciding what the next hundred changes look like.</p>
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="wrap col">
+    <p>PIVoTAL was built at <strong>COHO</strong>, a shared living and property management platform used by more than a thousand organisations across the UK. It's published here because the shift isn't specific to us.</p>
+    <p class="sig">VANN VOGSTAD &nbsp;·&nbsp; FOUNDER AND CEO, COHO &nbsp;·&nbsp; <a href="https://coho.life">coho.life</a></p>
+  </div>
+</footer>
+
+</main>
+
+<script>
+  (function () {
+    var links = Array.prototype.slice.call(document.querySelectorAll('.nav-links a'));
+    var map = {};
+    links.forEach(function (a) {
+      var el = document.querySelector(a.getAttribute('href'));
+      if (el) { map[a.getAttribute('href')] = el; }
+    });
+    var ids = Object.keys(map);
+    if (ids.length && 'IntersectionObserver' in window) {
+      var visible = {};
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          visible['#' + e.target.id] = e.isIntersecting ? e.intersectionRatio : 0;
+        });
+        var best = null, bestVal = 0;
+        ids.forEach(function (h) { if ((visible[h] || 0) > bestVal) { bestVal = visible[h]; best = h; } });
+        links.forEach(function (a) { a.classList.toggle('on', a.getAttribute('href') === best); });
+      }, { rootMargin: '-68px 0px -55% 0px', threshold: [0, 0.15, 0.4, 0.75, 1] });
+      ids.forEach(function (h) { io.observe(map[h]); });
+    }
+  })();
+
+  (function () {
+    var btn = document.getElementById('dl');
+    var note = document.getElementById('dlnote');
+    if (!btn) { return; }
+
+    var SKILLS = [
+      ['Product', 'What should be built, and why'],
+      ['Implementation', 'Turning a spec into something working'],
+      ['Design', 'Whether it looks right and fits'],
+      ['UX', 'Whether it makes sense to use'],
+      ['Technical', 'Code quality, infrastructure, guidance']
+    ];
+    var BANDS = [
+      ['0-1', 'None'], ['2-3', 'Aware'], ['4-5', 'Capable with support'],
+      ['6-7', 'Independent'], ['8-9', 'Strong'], ['10', 'Sets the standard']
+    ];
+
+    var INK = '#241F19', INK2 = '#59534A', INK3 = '#9A9288';
+    var PINK = '#CB0A73', PAPER = '#FBFAF6', RULE = '#E6E1D6', TINT = '#FCEEF5';
+
+    function roundRect(c, x, y, w, hh, r) {
+      c.beginPath();
+      c.moveTo(x + r, y);
+      c.arcTo(x + w, y, x + w, y + hh, r);
+      c.arcTo(x + w, y + hh, x, y + hh, r);
+      c.arcTo(x, y + hh, x, y, r);
+      c.arcTo(x, y, x + w, y, r);
+      c.closePath();
+    }
+
+    function draw() {
+      var S = 2, W = 1000, H = 1230;
+      var cv = document.createElement('canvas');
+      cv.width = W * S; cv.height = H * S;
+      var c = cv.getContext('2d');
+      c.scale(S, S);
+      c.textBaseline = 'alphabetic';
+
+      c.fillStyle = PAPER; c.fillRect(0, 0, W, H);
+
+      var M = 72;
+
+      // wordmark
+      c.font = '900 58px Mulish, Helvetica, Arial, sans-serif';
+      c.fillStyle = INK;
+      var t1 = 'PIV', t2 = 'o', t3 = 'TAL';
+      var x = M, y = 112;
+      c.fillText(t1, x, y); x += c.measureText(t1).width;
+      c.fillStyle = PINK;
+      c.font = '700 74px Mulish, Helvetica, Arial, sans-serif';
+      c.fillText(t2, x, y); x += c.measureText(t2).width;
+      c.fillStyle = INK;
+      c.font = '900 58px Mulish, Helvetica, Arial, sans-serif';
+      c.fillText(t3, x, y);
+
+      c.font = '600 21px Mulish, Helvetica, Arial, sans-serif';
+      c.fillStyle = INK2;
+      c.fillText('Skill scorecard', M, y + 34);
+
+      // name and date
+      c.font = '700 13px Mulish, Helvetica, Arial, sans-serif';
+      c.fillStyle = INK3;
+      c.fillText('NAME', M, 212);
+      c.fillText('DATE', 700, 212);
+      c.strokeStyle = RULE; c.lineWidth = 1.5;
+      c.beginPath(); c.moveTo(M, 236); c.lineTo(620, 236); c.stroke();
+      c.beginPath(); c.moveTo(700, 236); c.lineTo(W - M, 236); c.stroke();
+
+      // column headers
+      var lastX = 610, newX = 762, rowH = 128, top = 316;
+      c.font = '700 13px Mulish, Helvetica, Arial, sans-serif';
+      c.fillStyle = INK3;
+      c.fillText('SKILL', M, top - 22);
+      c.textAlign = 'center';
+      c.fillText('LAST', lastX + 52, top - 22);
+      c.fillStyle = PINK;
+      c.fillText('NEW', newX + 83, top - 22);
+      c.textAlign = 'left';
+
+      for (var i = 0; i < SKILLS.length; i++) {
+        var ry = top + i * rowH;
+
+        c.strokeStyle = RULE; c.lineWidth = 1;
+        c.beginPath(); c.moveTo(M, ry); c.lineTo(W - M, ry); c.stroke();
+
+        c.font = '800 27px Mulish, Helvetica, Arial, sans-serif';
+        c.fillStyle = INK;
+        c.fillText(SKILLS[i][0], M, ry + 48);
+        c.font = '400 16px Mulish, Helvetica, Arial, sans-serif';
+        c.fillStyle = INK3;
+        c.fillText(SKILLS[i][1], M, ry + 76);
+
+        // last score, small and quiet
+        c.strokeStyle = '#DCD7CB'; c.lineWidth = 1.4;
+        roundRect(c, lastX, ry + 28, 104, 62, 8); c.stroke();
+
+        // arrow
+        c.strokeStyle = '#C9C3B6'; c.lineWidth = 2; c.lineCap = 'round';
+        c.beginPath(); c.moveTo(lastX + 118, ry + 60); c.lineTo(lastX + 140, ry + 60); c.stroke();
+        c.beginPath();
+        c.moveTo(lastX + 133, ry + 53); c.lineTo(lastX + 141, ry + 60); c.lineTo(lastX + 133, ry + 67);
+        c.stroke();
+
+        // new score, the one that matters
+        c.fillStyle = TINT;
+        roundRect(c, newX, ry + 16, 166, 86, 10); c.fill();
+        c.strokeStyle = PINK; c.lineWidth = 2;
+        roundRect(c, newX, ry + 16, 166, 86, 10); c.stroke();
+      }
+
+      var by = top + SKILLS.length * rowH;
+      c.strokeStyle = RULE; c.lineWidth = 1;
+      c.beginPath(); c.moveTo(M, by); c.lineTo(W - M, by); c.stroke();
+
+      c.font = '700 13px Mulish, Helvetica, Arial, sans-serif';
+      c.fillStyle = INK3;
+      c.fillText('BANDS', M, by + 38);
+
+      for (var j = 0; j < BANDS.length; j++) {
+        var col = j % 3, row = Math.floor(j / 3);
+        var bx = M + col * 292, byy = by + 76 + row * 44;
+        c.font = '800 19px Mulish, Helvetica, Arial, sans-serif';
+        c.fillStyle = PINK;
+        c.fillText(BANDS[j][0], bx, byy);
+        c.font = '500 17px Mulish, Helvetica, Arial, sans-serif';
+        c.fillStyle = INK2;
+        c.fillText(BANDS[j][1], bx + 56, byy);
+      }
+
+      c.font = '400 15px Mulish, Helvetica, Arial, sans-serif';
+      c.fillStyle = INK3;
+      c.fillText('Self rate first, then calibrate. This measures what someone can be handed, not how well they are doing.', M, H - 44);
+
+      return cv;
+    }
+
+    function toBlob(cv) {
+      return new Promise(function (resolve, reject) {
+        cv.toBlob(function (b) { b ? resolve(b) : reject(new Error('no blob')); }, 'image/png');
+      });
+    }
+
+    btn.addEventListener('click', function () {
+      note.textContent = '';
+      btn.disabled = true;
+      var ready = document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve();
+      ready
+        .then(function () { return toBlob(draw()); })
+        .then(function (blob) {
+          return Promise.resolve(window.claude && window.claude.use ? window.claude.use('downloads') : null)
+            .then(function (downloads) {
+              if (!downloads) {
+                try {
+                  var url = URL.createObjectURL(blob);
+                  var a = document.createElement('a');
+                  a.href = url; a.download = 'pivotal-scorecard.png';
+                  document.body.appendChild(a); a.click(); a.remove();
+                  setTimeout(function () { URL.revokeObjectURL(url); }, 2000);
+                  note.textContent = 'Downloaded.';
+                } catch (e) {
+                  note.textContent = 'Downloads are not available in this view.';
+                }
+                return;
+              }
+              return downloads.save({ filename: 'pivotal-scorecard.png', data: blob })
+                .then(function () { note.textContent = 'Saved.'; })
+                .catch(function (e) {
+                  note.textContent = (e && e.code === 'declined') ? '' : 'Not saved.';
+                });
+            });
+        })
+        .catch(function () { note.textContent = 'Could not build the scorecard in this view.'; })
+        .then(function () { btn.disabled = false; });
+    });
+  })();
+</script>
+
+</body>
+</html>
