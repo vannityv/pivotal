@@ -394,6 +394,7 @@
       <li><a href="#stages">The six stages</a></li>
       <li><a href="#conversation">Implement is a conversation</a></li>
       <li><a href="#roles">Who carries it</a></li>
+      <li><a href="#nosurprises">No surprises after Implement</a></li>
       <li><a href="#handback">Handing it back</a></li>
       <li><a href="#afterlive">After Live</a></li>
       <li><a href="#technical">Technical input</a></li>
@@ -437,13 +438,13 @@
         <rect class="dg-box" x="250" y="20" width="340" height="86" rx="6"/>
         <text class="dg-name" x="272" y="50"><tspan class="k">P</tspan>RODUCT</text>
         <text class="dg-sub" x="272" y="71">Define what it should do, and why</text>
-        <text class="dg-sub" x="272" y="91">Owned by a Product Owner</text>
+        <text class="dg-sub" x="272" y="91">Names a Product Lead, who answers questions</text>
 
         <rect class="dg-box" x="250" y="158" width="340" height="104" rx="6"/>
         <text class="dg-name" x="272" y="190"><tspan class="k">I</tspan>MPLEMENT</text>
         <text class="dg-sub" x="272" y="211">Build it on screen with AI, writing unit</text>
         <text class="dg-sub" x="272" y="229">tests as you go</text>
-        <text class="dg-sub" x="272" y="249">Led by an Implementation Lead</text>
+        <text class="dg-sub" x="272" y="249">Names an Implementation Lead, who owns it</text>
 
         <text class="dg-par" transform="rotate(-90 420 344)" x="420" y="344" text-anchor="middle">IN PARALLEL</text>
 
@@ -476,37 +477,38 @@
     <div class="stages" id="stages">
       <div class="stage">
         <h3><i>P</i>roduct</h3>
-        <p>One person writes the spec. The problem, who has it, what the change does, what it explicitly doesn't do, and how we'll know it worked.</p>
-        <p class="who"><b>Product</b>Product Owner is accountable</p>
+        <p><strong>Product names a Product Lead.</strong> They write the spec: the problem, who has it, what the change does, what it explicitly doesn't do, and how we'll know it worked. From that moment they are the person who answers questions about it, all the way to Live.</p>
+        <p class="who"><b>Product Lead</b>Accountable for what gets built</p>
       </div>
       <div class="stage">
         <h3><i>I</i>mplement</h3>
-        <p>The spec becomes something working on screen, by prompting AI against our development and design guidelines, with unit tests written as you go rather than bolted on later. The Product Owner stays involved throughout, because this is where the questions the spec never answered come up. Hand-written code is the exception and needs a reason. If you find yourself typing it out, you are probably reaching back for the old way.</p>
-        <p class="who"><b>Implementation</b>Implementation Lead is accountable</p>
+        <p><strong>Implement names an Implementation Lead.</strong> This is the ownership role. The spec becomes something working on screen, by prompting AI against our development and design guidelines, with unit tests written as you go rather than bolted on later. The Product Lead stays involved throughout, because this is where the questions the spec never answered come up. Hand-written code is the exception and needs a reason. If you find yourself typing it out, you are probably reaching back for the old way.</p>
+        <p class="who"><b>Implementation Lead</b>Owns it from here to Live</p>
       </div>
       <div class="stage">
         <h3><i>V</i>alidate</h3>
         <div class="two">
           <p><b>Product review.</b> Does it do what we wanted? Spec coverage, and whether the flow makes sense for what the customer is doing. <span class="sk">Product + UX</span></p>
           <p><b>Design review.</b> Does it look right? Visual fit with the rest of the product, the design language, the styling rules. <span class="sk">Design + UX</span></p>
+          <p>One person holding both skills covers both in a single pass. A reviewer may make the change themselves, or spell out exactly what should change and hand it back. Either is fine. What they don't do is own the feature: that stays with the Implementation Lead.</p>
         </div>
-        <p class="who"><b>Run in parallel</b>Both must sign off before Test</p>
+        <p class="who"><b>Supporting role</b>One person can do both. Runs in parallel, both sign off before Test</p>
       </div>
       <div class="stage">
         <h3><i>T</i>est</h3>
         <p>Somebody uses it properly and tries to break it. Zero, one, a thousand. Part-filled records. Notifications reaching the right people. Different permissions and account setups. Automated tests get written during Implement as a matter of course, so this stage is about everything they don't catch.</p>
         <p>What it looks like depends entirely on your business and your product. It can be AI, it can be people, and it is often both. What matters is good observation rather than product skill, and it is usually better done by someone outside the core technical team, who has not spent a fortnight looking at it. Informal testing during Implement is fine and often faster, but the real pass happens once the thing has stopped moving. On anything touching money, permissions or data, one person is accountable for knowing the right kinds of testing actually happened.</p>
-        <p class="who"><b>Observation, not product skill</b>Better from outside the core team</p>
+        <p class="who"><b>Supporting role</b>Observation, not product skill. Better from outside the core team</p>
       </div>
       <div class="stage">
         <h3><i>A</i>ssure</h3>
         <p>Code review. Is it safe, does it fit the codebase, and is the test coverage good enough? AI reviews first, a human reviews the review. It must not change function or appearance. If a fix would, it goes back to the Implementation Lead rather than being slipped in at the end.</p>
-        <p class="who"><b>Technical</b>Reviewer gives the verdict</p>
+        <p class="who"><b>Supporting role</b>Technical. Gives the verdict, not the ownership</p>
       </div>
       <div class="stage">
         <h3><i>L</i>ive</h3>
-        <p>Released to customers. Anything Assure found goes back into the AI guidance so the next change starts from a better place, and once it has been out a while the Product Owner checks whether it actually worked.</p>
-        <p class="who"><b>Implementation Lead</b>Carries it to the end</p>
+        <p>Released to customers. Anything Assure found goes back into the AI guidance so the next change starts from a better place, and once it has been out a while the Product Lead checks whether it actually worked.</p>
+        <p class="who"><b>Implementation Lead</b>Carried it the whole way</p>
       </div>
     </div>
 
@@ -514,14 +516,23 @@
       <h3 id="conversation">Implement is a conversation, not a handover</h3>
       <p>This is the part most teams get wrong, and it matters more than any other rule here.</p>
       <p>A product spec describes what something should do. It rarely describes what it should be. As soon as someone starts building, questions appear that the spec never answered. What happens to the records that already exist. Where this sits in the navigation. What the empty state says. Whether this is two screens or one.</p>
-      <p>So Implement is not a stage where someone takes the spec away and comes back with a feature. The Product Owner stays in it. Build a bit, show it, ask, adjust, show it again. That loop can run several times in a day, and it should.</p>
+      <p>So Implement is not a stage where someone takes the spec away and comes back with a feature. The Product Lead stays in it. Build a bit, show it, ask, adjust, show it again. That loop can run several times in a day, and it should.</p>
       <p>The flow is drawn top to bottom, which makes it look like a waterfall. It isn't. The line between Product and Implement is the busiest one on the diagram and it runs both ways, which is why it's the only solid arrow pointing back up.</p>
       <p>Now and then the intent really is clear enough that nothing needs raising until review. That's rare. Assuming you're in that case is the most common way a change goes wrong.</p>
 
-      <h3 id="roles">Two roles carry it, and one of them runs the show</h3>
-      <p>The <strong>Implementation Lead</strong> is the key role. They don't just build it, they effectively manage the feature: agreeing the delivery window with Product, running the build, taking it through every remaining stage, and getting it Live.</p>
-      <p>The <strong>Product Owner</strong> sets what it should do and why, stays in the conversation throughout, and is the last person to say yes. Think of a film. The Implementation Lead directs it day to day. The Product Owner is the producer who decided it should exist and confirms it is what was wanted.</p>
-      <p>On a small change these are often the same person. Everyone else gives a verdict.</p>
+      <h3 id="roles">Two named people, and everyone else supports them</h3>
+      <p>Every change names two people, and it names them early.</p>
+      <p>The <strong>Product Lead</strong> comes out of the Product stage. They decided what should exist and why, and from then on they are the person who answers questions about it. Not a committee, not whoever is free. One name.</p>
+      <p>The <strong>Implementation Lead</strong> comes out of Implement, and this is the ownership role. They don't just build it, they carry it: agreeing the delivery window, running the build, taking it through Validate, Test and Assure, and getting it Live.</p>
+      <p>Everyone else is supporting. Both reviews, Test and Assure give a verdict and may do work to help it land, but none of them take ownership of the feature. It stays with the Implementation Lead the whole way.</p>
+      <p>On a small change the two leads are often the same person.</p>
+      <h3 id="nosurprises">No surprises after Implement</h3>
+      <p>The Implementation Lead is expected to make decisions. A spec can't answer everything, and stopping to ask about every detail would be slower than the old way. Good judgement is most of the job.</p>
+      <p>But the boundary is firm. <strong>If a decision turns out to be counter to what the Product Lead wanted, the Implementation Lead has failed</strong>, even if the decision was a reasonable one on its own terms. Being sensible is not the standard. Being right about what the Product Lead would say is the standard, and the way you get that right is by asking.</p>
+      <p>So nothing after Implement should surprise the Product Lead. By the time it reaches Validate they should already know what they are going to see. If Product Review is where they first discover a meaningful product decision, something went wrong earlier, and the fix is upstream in the conversation rather than in the review.</p>
+      <p>Meaningful product decisions are never made alone. Small ones, made well, are exactly what the role is for.</p>
+
+      <h3 id="judging">Judging an Implementation Lead</h3>
       <p>What tells you an Implementation Lead is good at it is mostly calibration and momentum. Does the window they agreed turn out to be about right, across many changes rather than any single one? Did they keep it moving, line reviewers up, and nudge when it stalled?</p>
       <p>Be careful with the obvious measure. Counting how much came back from Product Review and Design Review looks useful and mostly isn't. Reviewers aren't there to hold up a scorecard, they do the work needed alongside the Implementation Lead to land it inside the product intention, and plenty of good implementers are weak at design or UX, which is fine. Nor is the state of the code really a verdict on them. Mostly it's a verdict on the guidance the AI was given, which belongs to whoever owns that.</p>
       <p>Nobody signs off their own work. That's the only hard rule.</p>
@@ -548,13 +559,13 @@
     </div>
 
     <div class="col">
-      <p style="margin-top:22px">Nothing goes from Validate straight back to Product. It goes to the Implementation Lead, who raises it with the Product Owner if the spec itself turns out to be the problem. One person holds the thread the whole way, so a change never ends up in two conversations at once.</p>
+      <p style="margin-top:22px">Nothing goes from Validate straight back to Product. It goes to the Implementation Lead, who raises it with the Product Lead if the spec itself turns out to be the problem. One person holds the thread the whole way, so a change never ends up in two conversations at once.</p>
       <p>Re-entry is targeted. A fix that changes nothing visible goes back to Test only. A fix that changes function or appearance goes back through the review first.</p>
-      <p>The usual failure isn't a bad review. It's silence, with work sitting on someone who hasn't looked at it. The Implementation Lead chases. If they go quiet, the Product Owner picks it up. That's the whole escalation path.</p>
+      <p>The usual failure isn't a bad review. It's silence, with work sitting on someone who hasn't looked at it. The Implementation Lead chases. If they go quiet, the Product Lead picks it up. That's the whole escalation path.</p>
 
       <h3 id="afterlive">After Live, back to Product</h3>
       <p>The spec said how we would know it worked. Something has to go and look.</p>
-      <p>After a change has been out for a while, the Product Owner and Implementation Lead review it together. Did it do what we hoped? Did the build take roughly as long as was agreed, and if not, was that in the Implementation Lead's hands? How much came back from testing? It's a short conversation, not a ceremony, and it's the Product Owner's job unless they hand it to someone.</p>
+      <p>After a change has been out for a while, the Product Lead and Implementation Lead review it together. Did it do what we hoped? Did the build take roughly as long as was agreed, and if not, was that in the Implementation Lead's hands? How much came back from testing? It's a short conversation, not a ceremony, and it's the Product Lead's job unless they hand it to someone.</p>
       <p>Day to day problems don't wait for that. They come in through support and feed into the usual improvement flow. The review is for the question support can't answer, which is whether the thing was worth building.</p>
       <p>That loop is what makes this a product process rather than a delivery process. Live isn't the end of the line, it's where Product finds out if it was right.</p>
 
@@ -564,14 +575,14 @@
 
       <h3 id="appetite">Appetite, and how many people</h3>
       <p>There is no fixed cycle length here. No six week block, no sprint. When a competent person can have a feature working the same day, a calendar-shaped container is the wrong shape.</p>
-      <p>What replaces it is an appetite, agreed between the Product Owner and the Implementation Lead before Implement starts. It is a target for how long the build should take, not a deadline anyone is held to. <strong>If the answer is more than about two weeks, that is a signal to make it smaller</strong>, not a signal to book two weeks.</p>
+      <p>What replaces it is an appetite, agreed between the Product Lead and the Implementation Lead before Implement starts. It is a target for how long the build should take, not a deadline anyone is held to. <strong>If the answer is more than about two weeks, that is a signal to make it smaller</strong>, not a signal to book two weeks.</p>
       <p>Keep the people count low. One or two per stage, with one lead. Development moves quickly enough now that two people on the same piece mostly get in each other's way, unless the work genuinely splits into two areas with a clear line between them. When it does split, one of them is still the Implementation Lead and owns the join.</p>
-      <p>Work to strengths and pass the small stuff down. A strong Product Owner should hand smaller product decisions to someone more junior rather than deciding everything. A strong Implementation Lead should hand smaller areas over the same way. That is how people move up the scale, and it is how the leads stay available.</p>
+      <p>Work to strengths and pass the small stuff down. A strong Product Lead should hand smaller product decisions to someone more junior rather than deciding everything. A strong Implementation Lead should hand smaller areas over the same way. That is how people move up the scale, and it is how the leads stay available.</p>
 
       <h3 id="big">Running it on something big</h3>
       <p>A big project doesn't go through PIVoTAL as one change. Treat it as a wider product idea, and split it into smaller products, each with its own appetite and its own Implementation Lead.</p>
       <p>The high level spec answers the questions that only make sense at the top. What are we building, for whom, what does it replace, what are the hard edges. It doesn't try to describe every screen, because it can't, and pretending otherwise is how the old way went wrong.</p>
-      <p>Each one then runs the full loop on its own. Product, Implement, Validate, Test, Assure, Live. They can run at the same time if they don't overlap, and the Product Owner stays the same person across all of them so the whole thing holds together.</p>
+      <p>Each one then runs the full loop on its own. Product, Implement, Validate, Test, Assure, Live. They can run at the same time if they don't overlap, and the Product Lead stays the same person across all of them so the whole thing holds together.</p>
       <p><strong>The danger isn't the pieces, it's the seams.</strong> Ten individually correct changes can still add up to an incoherent whole if they share state, workflows, terminology or architecture. So the boundaries between areas belong in the high level definition: what each area owns, what it hands to the others, and what they agree between them. Without that, deciding whether two areas overlap is guesswork.</p>
       <p>How do you eat an elephant? One bite at a time. The point of breaking it down isn't project management, it's that a small piece can actually be validated by a human looking at a screen.</p>
 
@@ -649,9 +660,9 @@
     <div class="col">
       <p style="margin-top:22px">Treat the numbers as progression rather than as gates. Most people start low in most of the five. You go up by doing the work well and having that noticed. A one becomes a two, a two becomes a three, and each step is earned rather than granted at a review because enough time has passed.</p>
       <p>They go down too. A run of work that misses, a spec that turned out to be wrong, an implementation that came back from review repeatedly. Not on one bad change, because everyone has those, but a pattern should move the number. A scale that only goes up stops meaning anything within a year.</p>
-      <p>The rating is done by the people who decide who goes on what, which is usually the Product Owners, together with whoever manages the person. Ask for a self rating first, because the gap between the two is often the most useful part of the conversation. A score needs a recent example behind it, not a feeling.</p>
+      <p>The rating is done by the people who decide who goes on what, which is usually the Product Leads, together with whoever manages the person. Ask for a self rating first, because the gap between the two is often the most useful part of the conversation. A score needs a recent example behind it, not a feeling.</p>
       <p>The bar also moves. A four in a young business can be a two in the same business two years later, because what the work demands has gone up. Somebody can stand still, do nothing worse than before, and still drop. That is not a punishment, it is the scale staying honest about what you need now. Say it out loud when it happens, because it stings if it arrives unexplained.</p>
-      <p>Don't publish everyone's numbers. A permanent public list of Product 9, Technical 3, Design 5 becomes a ranking however often you say it isn't one, and 0 to 10 feels evaluative in a way bands don't. Scores are known to the person, their manager, and whoever decides who goes on what, which is often the Product Owner. What can be open is the shape of the team: which skills are thin, and where there is only one person to call on.</p>
+      <p>Don't publish everyone's numbers. A permanent public list of Product 9, Technical 3, Design 5 becomes a ranking however often you say it isn't one, and 0 to 10 feels evaluative in a way bands don't. Scores are known to the person, their manager, and whoever decides who goes on what, which is often the Product Lead. What can be open is the shape of the team: which skills are thin, and where there is only one person to call on.</p>
       <p>Keep tens rare. If half the team is a ten at something, the scale has stopped being useful.</p>
     </div>
 
@@ -704,7 +715,7 @@
       <p id="steps">The risk is that it arrives all at once, everyone follows it for two weeks, and then it quietly stops.</p>
       <ol class="steps">
         <li>Agree the stages and the skill definitions. Changes now are cheap.</li>
-        <li>Rate the team. The people who decide who goes on what do the rating, usually the Product Owners, with the person's own view taken into account.</li>
+        <li>Rate the team. The people who decide who goes on what do the rating, usually the Product Leads, with the person's own view taken into account.</li>
         <li>Run it on the next two or three changes. Pick something meaningful rather than tiny, but not the one with a load of curve balls. A first run at an unfamiliar process shouldn't also be your riskiest project.</li>
         <li>Review what broke. It'll be handoffs and appetites. Adjust.</li>
         <li>Make it the default and start tracking the pass rate.</li>
