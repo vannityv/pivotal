@@ -364,7 +364,8 @@
     <p>What shrinks is the middle, where the decision was already made and someone had to type it out.</p>
 
     <h3 id="process-must">Why the process has to move</h3>
-    <p>Long specs, estimates, planning ceremonies and careful scoping all existed to protect engineering time, because engineering time was the expensive thing. Keeping them in place spends the care in the wrong spot.</p>
+    <p>Estimates, planning ceremonies and careful scoping all existed to protect engineering time, because engineering time was the expensive thing. Keeping them in place spends the care in the wrong spot.</p>
+    <p>That cost also shaped the product. Product would define something, development would push back on the effort, and what shipped was a slightly weaker version of the idea. That trade-off has mostly gone. Cheaper building gives you a choice: do the same thing in half the time, or spend the same effort on a better product. <strong>PIVoTAL pushes for the better product.</strong> Your competitors will.</p>
     <p>PIVoTAL is what we use at COHO instead.</p>
   </div>
 </section>
@@ -392,6 +393,7 @@
     <ul class="subnav">
       <li><a href="#flow">The flow</a></li>
       <li><a href="#stages">The six stages</a></li>
+      <li><a href="#spec">Shaping the spec</a></li>
       <li><a href="#conversation">Implement is a conversation</a></li>
       <li><a href="#roles">Who carries it</a></li>
       <li><a href="#nosurprises">No surprises after Implement</a></li>
@@ -477,8 +479,8 @@
     <div class="stages" id="stages">
       <div class="stage">
         <h3><i>P</i>roduct</h3>
-        <p><strong>Product names a Product Lead.</strong> They write the spec: the problem, who has it, what the change does, what it explicitly doesn't do, and how we'll know it worked. From that moment they are the person who answers questions about it, all the way to Live.</p>
-        <p class="who"><b>Product Lead</b>Accountable for what gets built</p>
+        <p><strong>Product names a Product Lead.</strong> They produce the spec with AI, giving it significant guidance, and read it back in full. It covers the problem, who has it, what the change does, what it explicitly doesn't do, how we'll know it worked, any technical areas that need calling out, and how it might break into phases. The Product Lead owns the spec, and from that moment they are the person who answers questions about it, all the way to Live. Product is complete when the Implementation Lead understands the spec.</p>
+        <p class="who"><b>Product Lead</b>Accountable for what gets built. Owns the spec</p>
       </div>
       <div class="stage">
         <h3><i>I</i>mplement</h3>
@@ -503,19 +505,29 @@
       <div class="stage">
         <h3><i>A</i>ssure</h3>
         <p>Code review. Is it safe, does it fit the codebase, and is the test coverage good enough? AI reviews first, a human reviews the review. It must not change function or appearance. If a fix would, it goes back to the Implementation Lead rather than being slipped in at the end.</p>
+        <p>Nobody is hand-writing the code, so the Implementation Lead can do this themselves if their technical skill is up to it. They are reviewing what the AI wrote, not marking their own homework.</p>
         <p class="who"><b>Supporting role</b>Technical. Gives the verdict, not the ownership</p>
       </div>
       <div class="stage">
         <h3><i>L</i>ive</h3>
-        <p>Released to customers. Anything Assure found goes back into the AI guidance so the next change starts from a better place, and once it has been out a while the Product Lead checks whether it actually worked.</p>
+        <p>Released to customers. Anything Assure found goes back into the AI guidance so the next change starts from a better place, and once it has been out a while the Product Lead checks whether it actually worked. The final spec feeds the product guide.</p>
         <p class="who"><b>Implementation Lead</b>Carried it the whole way</p>
       </div>
     </div>
 
     <div class="col">
+      <h3 id="spec">Shaping the spec</h3>
+      <p>Product needs a good amount of thinking up front. The Product Lead should have a clear idea of what to build before anyone builds it. If you know Shape Up, this part will feel familiar: shaping before building, an appetite rather than an estimate, and naming the no-gos. PIVoTAL borrows those ideas and leaves the rest.</p>
+      <p><strong>How much detail the spec needs depends on who receives it.</strong> The higher the implementer's product skill, the more can be left to them. A Product Lead at Product 10, handing to someone at Product 8 and Implementation 7, can leave a lot open, because the implementer will make good calls and know which ones to raise. Handing the same change to someone at Product 3 and Implementation 7 needs far more written down. The numbers are an illustration, not a threshold. Someone has to make the product decisions either way, and it has to be someone with enough product skill to make them well.</p>
+      <p>So a spec is as long as it needs to be. Short for a strong implementer is fine, long and detailed for a less experienced one is fine. What matters is that it's accurate. AI will happily write something long and plausible, which is why the Product Lead reads every word back before it's handed over.</p>
+      <p>An implementer can be brought in during Product too. A second view while shaping usually makes the spec better, and the person building it starts out already understanding it.</p>
+      <p><strong>Not every assumption has to be settled on paper.</strong> Now that building is cheap, some are faster to test by building a rough version and seeing how it feels in a near-live environment. The Product Lead can start building themselves, either to become the Implementation Lead, or to experiment and then hand over to a new Implementation Lead who carries on from it or starts again. Either way it happens within the agreed appetite, and the experiment is a way of passing on detail, not of skipping the spec. What was learned goes into the spec. If the new Implementation Lead starts again and gets it wrong, that is still a surprise, and still an Implementation failure.</p>
+      <p><strong>The spec is living, and the Product Lead owns it.</strong> It changes as Implement answers questions the spec didn't, but only the Product Lead approves a change to it. An Implementation Lead editing the spec on their own is working outside their role, and it's an early sign the Product Lead is about to be surprised. By Live, the spec should describe what was actually built, because it feeds the reviews and, later, the product guide.</p>
+
       <h3 id="conversation">Implement is a conversation, not a handover</h3>
       <p>This is the part most teams get wrong, and it matters more than any other rule here.</p>
       <p>A product spec describes what something should do. It rarely describes what it should be. As soon as someone starts building, questions appear that the spec never answered. What happens to the records that already exist. Where this sits in the navigation. What the empty state says. Whether this is two screens or one.</p>
+      <p>Some of that can't be avoided. Some things are hard to describe until you can see them, and new requirements appear however hard you try. And sometimes it's more efficient to leave a decision until the thing starts taking shape. That's a legitimate choice, not a gap in the spec. A deferred decision still gets made in this conversation, never by the Implementation Lead alone.</p>
       <p>So Implement is not a stage where someone takes the spec away and comes back with a feature. The Product Lead stays in it. Build a bit, show it, ask, adjust, show it again. That loop can run several times in a day, and it should.</p>
       <p>The flow is drawn top to bottom, which makes it look like a waterfall. It isn't. The line between Product and Implement is the busiest one on the diagram and it runs both ways, which is why it's the only solid arrow pointing back up.</p>
       <p>Now and then the intent really is clear enough that nothing needs raising until review. That's rare. Assuming you're in that case is the most common way a change goes wrong.</p>
@@ -525,17 +537,18 @@
       <p>The <strong>Product Lead</strong> comes out of the Product stage. They decided what should exist and why, and from then on they are the person who answers questions about it. Not a committee, not whoever is free. One name.</p>
       <p>The <strong>Implementation Lead</strong> comes out of Implement, and this is the ownership role. They don't just build it, they carry it: agreeing the delivery window, running the build, taking it through Validate, Test and Assure, and getting it Live.</p>
       <p>Everyone else is supporting. Both reviews, Test and Assure give a verdict and may do work to help it land, but none of them take ownership of the feature. It stays with the Implementation Lead the whole way.</p>
-      <p>On a small change the two leads are often the same person.</p>
+      <p>On a small change the two leads are often the same person, if timing and skill allow. In theory one person can carry a change end to end. But every role you hold yourself loses a second pair of eyes. Doing it all alone is a warning sign, and in a bigger team it amplifies risk. Two people is often enough. If you hand on only one stage, make it Test: your own feature is the hardest thing to try to break.</p>
       <h3 id="nosurprises">No surprises after Implement</h3>
       <p>The Implementation Lead is expected to make decisions. A spec can't answer everything, and stopping to ask about every detail would be slower than the old way. Good judgement is most of the job.</p>
       <p>But the boundary is firm. <strong>If a decision turns out to be counter to what the Product Lead wanted, the Implementation Lead has failed</strong>, even if the decision was a reasonable one on its own terms. Being sensible is not the standard. Being right about what the Product Lead would say is the standard, and the way you get that right is by asking.</p>
       <p>So nothing after Implement should surprise the Product Lead. By the time it reaches Validate they should already know what they are going to see. If Product Review is where they first discover a meaningful product decision, something went wrong earlier, and the fix is upstream in the conversation rather than in the review.</p>
       <p>Meaningful product decisions are never made alone. Small ones, made well, are exactly what the role is for.</p>
+      <p><strong>A rethink is not a surprise.</strong> If the Product Lead sees it working and changes their mind, that isn't anyone's failure. It's the process doing its job, and it's encouraged whenever it leads to a better result. A surprise is finding out about a decision you didn't know had been made. A rethink is choosing to change one you did.</p>
 
       <h3 id="judging">Judging an Implementation Lead</h3>
       <p>What tells you an Implementation Lead is good at it is mostly calibration and momentum. Does the window they agreed turn out to be about right, across many changes rather than any single one? Did they keep it moving, line reviewers up, and nudge when it stalled?</p>
       <p>Be careful with the obvious measure. Counting how much came back from Product Review and Design Review looks useful and mostly isn't. Reviewers aren't there to hold up a scorecard, they do the work needed alongside the Implementation Lead to land it inside the product intention, and plenty of good implementers are weak at design or UX, which is fine. Nor is the state of the code really a verdict on them. Mostly it's a verdict on the guidance the AI was given, which belongs to whoever owns that.</p>
-      <p>Nobody signs off their own work. That's the only hard rule.</p>
+      <p>Avoid signing off your own work. It isn't forbidden, but when it happens, ask why. Two brains are usually better than one.</p>
 
       <h3>Changes get smaller as work moves down</h3>
       <p>Product can change anything. Implement changes how it's built. Validate changes function and appearance. Test changes nothing and reports. Assure changes only code, with no visible footprint.</p>
@@ -568,6 +581,7 @@
       <p>After a change has been out for a while, the Product Lead and Implementation Lead review it together. Did it do what we hoped? Did the build take roughly as long as was agreed, and if not, was that in the Implementation Lead's hands? How much came back from testing? It's a short conversation, not a ceremony, and it's the Product Lead's job unless they hand it to someone.</p>
       <p>Day to day problems don't wait for that. They come in through support and feed into the usual improvement flow. The review is for the question support can't answer, which is whether the thing was worth building.</p>
       <p>That loop is what makes this a product process rather than a delivery process. Live isn't the end of the line, it's where Product finds out if it was right.</p>
+      <p>The final spec goes somewhere too. Once a change has passed Assure and gone Live, the spec and the product as built feed a product guide, internal or external. See <a href="#productguide">Build a living product guide</a>.</p>
 
       <h3 id="technical">Technical input moves earlier when the risk is real</h3>
       <p>Assure is always the final technical verdict, but it is a bad place to discover the whole approach was wrong. A new authentication model, a payment architecture, a fundamental data model change, anything concurrency-sensitive, a major external integration: on work like that, get someone strong technically involved during Product or Implement, not at the end.</p>
@@ -576,6 +590,7 @@
       <h3 id="appetite">Appetite, and how many people</h3>
       <p>There is no fixed cycle length here. No six week block, no sprint. When a competent person can have a feature working the same day, a calendar-shaped container is the wrong shape.</p>
       <p>What replaces it is an appetite, agreed between the Product Lead and the Implementation Lead before Implement starts. It is a target for how long the build should take, not a deadline anyone is held to. <strong>If the answer is more than about two weeks, that is a signal to make it smaller</strong>, not a signal to book two weeks.</p>
+      <p>Cheaper building shouldn't only mean smaller appetites. The time saved is a choice, and PIVoTAL leans towards spending it on a better product: one that does what it should and is easy to use. Development cost is no longer an excuse for a weak product. Scope still costs, though, even as costs shrink. Every addition is more to review, test, support and learn. So the ambition goes into how good each piece is, not how big it gets.</p>
       <p>Keep the people count low. One or two per stage, with one lead. Development moves quickly enough now that two people on the same piece mostly get in each other's way, unless the work genuinely splits into two areas with a clear line between them. When it does split, one of them is still the Implementation Lead and owns the join.</p>
       <p>Work to strengths and pass the small stuff down. A strong Product Lead should hand smaller product decisions to someone more junior rather than deciding everything. A strong Implementation Lead should hand smaller areas over the same way. That is how people move up the scale, and it is how the leads stay available.</p>
 
@@ -709,6 +724,7 @@
       <li><a href="#steps">Five steps</a></li>
       <li><a href="#meaningful">What counts as a change</a></li>
       <li><a href="#guidance">Write the guidance files first</a></li>
+      <li><a href="#productguide">Build a living product guide</a></li>
       <li><a href="#yourteam">Then make it yours</a></li>
     </ul>
     <div class="col">
@@ -736,9 +752,32 @@
         <li>Where things live, and which existing patterns should be reused instead of reinvented</li>
         <li>How you name things</li>
         <li>What your tests look like and what has to be covered</li>
+        <li>Your design system: which components exist, which must be reused, and the styling rules</li>
         <li>What's off limits, and what needs a human before it's touched</li>
       </ul>
-      <p>It's never finished, and that's the point. Every finding from Assure goes back into it. Over time it becomes the most valuable file in the repo, because it's the one deciding what the next hundred changes look like.</p>
+      <p>How to write it:</p>
+      <ol class="steps">
+        <li><strong>Name one owner.</strong> Findings land with them, and they decide what goes in.</li>
+        <li><strong>Start from what's there.</strong> Ask the AI to read the codebase and draft the file, then correct it. It will describe what the code does. You describe what you want it to do.</li>
+        <li><strong>Put the most broken rules at the top.</strong> Short and checkable, so a reviewer can hold a change up against them in a minute.</li>
+        <li><strong>Keep the root file short and link out.</strong> Detailed guidance on one area, such as the design system, testing or the data model, lives in its own file that AGENTS.md points to, so the AI reads it when it's relevant.</li>
+        <li><strong>Give the reason with the rule.</strong> "Never do X, because Y" gets followed in cases the rule didn't foresee.</li>
+        <li><strong>Test it on a real change.</strong> Read what comes back. Anything it got wrong is a gap in the file, not a bad day for the AI.</li>
+        <li><strong>Feed Assure into it.</strong> Every finding that isn't a one-off becomes a new line, or a rewrite of one that was ambiguous.</li>
+      </ol>
+      <p>It's never finished, and that's the point. Over time it becomes the most valuable file in the repo, because it's the one deciding what the next hundred changes look like.</p>
+
+      <h3 id="productguide">Build a living product guide</h3>
+      <p>Most product guides are written once and then drift. PIVoTAL already produces what a guide needs: a spec that matches what was built, checked in Validate and Assure. So use it, and automate as much as you can.</p>
+      <ol class="steps">
+        <li><strong>Keep specs where everyone can find them.</strong> One per change, with a clear status: in progress, live, or replaced.</li>
+        <li><strong>Make the final spec match what shipped.</strong> This is the Product Lead's check at Live, and it's why spec changes need their approval during Implement.</li>
+        <li><strong>Automate the update.</strong> When a change goes Live, have AI fold the spec into the guide. It should update the pages the change touches rather than append a changelog, and mark what it replaced.</li>
+        <li><strong>Split the audiences.</strong> The internal guide can carry the reasoning, the no-gos and the technical areas. The external one describes what customers can do, and how.</li>
+        <li><strong>Put a human on anything customer-facing.</strong> AI drafts it, and someone reads it before it's published, the same way the spec was read back.</li>
+        <li><strong>Use it.</strong> Point support, sales and onboarding at it. And feed it back into Product: the next spec starts from how the product actually works today.</li>
+      </ol>
+      <p>The same specs feed the reviews. Validate checks the build against the spec, and Assure can check test coverage against it. A spec that gets used three times is one people keep accurate.</p>
     </div>
   </div>
 </section>
